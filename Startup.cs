@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebAssignment_3_BookTrack.Data.Context;
 
 namespace WebAssignment_3_BookTrack
 {
@@ -24,6 +26,20 @@ namespace WebAssignment_3_BookTrack
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddDbContext<BookContext>(options =>
+            {
+                options.UseSqlite("Data Source=c:\\temp\\mydb.db;");
+            });
+
+            services.AddDbContext<CategoryContext>(options =>
+            {
+                options.UseSqlite("Data Source=c:\\temp\\mydb.db;");
+            });
+
+            services.AddDbContext<CategoryTypeContext>(options =>
+            {
+                options.UseSqlite("Data Source=c:\\temp\\mydb.db;");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
